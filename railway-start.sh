@@ -5,6 +5,19 @@ set -e
 
 : "${APP_KEY:?APP_KEY must be set (the template generates it)}"
 
+# Laravel's AES-256 key must be 32 bytes or "base64:<32 bytes>". A generated
+# secret of any other length is turned into a stable key (SHA-256 of it), so the
+# same variable always gives the same key across redeploys.
+case "$APP_KEY" in
+  base64:*) ;;
+  *)
+    if [ "$(printf %s "$APP_KEY" | wc -c)" -ne 32 ]; then
+      APP_KEY="base64:$(php -r 'echo base64_encode(hash("sha256", getenv("APP_KEY"), true));')"
+      export APP_KEY
+    fi
+    ;;
+esac
+
 # FrankenPHP listens on the address in SERVER_NAME; Railway routes to PORT.
 export SERVER_NAME=":${PORT:-2226}"
 
