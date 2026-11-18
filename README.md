@@ -1,3 +1,5 @@
+[![Deploy on Railway](https://railway.com/button.svg)](https://railway.com/new/template/databasement?utm_medium=integration&utm_source=button&utm_campaign=databasement)
+
 # Databasement on Railway
 
 This repo packages [Databasement](https://github.com/David-Crty/databasement), an open-source (MIT) database backup manager with a web UI, as a Railway template.

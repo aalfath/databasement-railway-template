@@ -9,3 +9,5 @@ Upstream's own changelog: https://github.com/David-Crty/databasement/blob/main/C
 - One service with web server, queue worker and scheduler; SQLite and local backups on a volume at `/data`.
 - The admin account is created from `ADMIN_EMAIL` and a generated `ADMIN_PASSWORD` before the web server starts, so the public first-user registration page is never open.
 - Health check on `/health`.
+- `APP_KEY` of any length is accepted: a non-32-byte value is turned into a stable key (SHA-256), so the key never changes between redeploys.
+- README starts with the Deploy on Railway button for the published template `databasement`.
